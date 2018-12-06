@@ -1,6 +1,4 @@
-
-FROM jboss/base-jdk:8
-
+FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:latest
 EXPOSE 9042 9160 7000 7001
 
 
@@ -12,11 +10,9 @@ ENV CASSANDRA_VERSION="3.11.2" \
 
 USER root
 
-RUN yum install -y -q bind-utils && \
-   yum clean all
+COPY apache-cassandra-3.11.2-bin.tar.gz /opt/apache-cassandra-3.11.2-bin.tar.gz
 
 RUN cd /opt &&\
-	curl -LO http://apache.uvigo.es/cassandra/$CASSANDRA_VERSION/apache-cassandra-$CASSANDRA_VERSION-bin.tar.gz && ls -l &&\ 
     tar xvzf apache-cassandra-$CASSANDRA_VERSION-bin.tar.gz && \
     rm apache-cassandra-$CASSANDRA_VERSION-bin.tar.gz && \
     ln -s apache-cassandra-$CASSANDRA_VERSION apache-cassandra
@@ -52,5 +48,3 @@ RUN  mkdir -p /var/lib/cassandra \
 USER 313	
 
 VOLUME /var/lib/cassandra
-
-
