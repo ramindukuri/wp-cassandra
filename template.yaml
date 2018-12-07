@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Template
 metadata:
-  name: openstack-cassandra-build
+  name: cassandra-build
   annotations:
-    description: Cassandra builder for openstack-poc
-    tags: logs,poc,openstack,cassandra
+    description: Cassandra builder for World Pay
+    tags: logs,openshift,cassandra
 
 parameters:
 - name: SOURCE_REPOSITORY_URL
   description: URL of the Git repository Dockerfile
   required: true
-  value: https://github.com/keedio/openshift-cassandra.git
+  value: https://github.com/rindukuri/wp-cassandra.git
 - name: OBJECT_NAME_PREFIX
   description: Name prefix for each object created
   required: true

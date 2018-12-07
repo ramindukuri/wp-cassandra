@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: cassandra
-          image: 172.30.192.249:5000/stateful-sets/cassandra-openstack-poc:latest
+          image: wp-cassandra
           restartPolicy: Always
           command:
           - "/opt/apache-cassandra/bin/docker-entrypoint-stateful-sets.sh"

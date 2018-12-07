@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:latest
+FROM jboss/base-jdk:8
 EXPOSE 9042 9160 7000 7001
 
 
@@ -10,6 +10,8 @@ ENV CASSANDRA_VERSION="3.11.2" \
 
 USER root
 
+RUN yum install -y bind-utils
+
 COPY apache-cassandra-3.11.2-bin.tar.gz /opt/apache-cassandra-3.11.2-bin.tar.gz
 
 RUN cd /opt &&\
@@ -17,20 +19,12 @@ RUN cd /opt &&\
     rm apache-cassandra-$CASSANDRA_VERSION-bin.tar.gz && \
     ln -s apache-cassandra-$CASSANDRA_VERSION apache-cassandra
 
-
-#COPY cassandra-lucene-index-plugin-3.0.10.3.jar \
-#     /opt/apache-cassandra/lib/
-
-#COPY cassandra-lucene-index-plugin-3.10.0-RC1-SNAPSHOT.jar \
-#     /opt/apache-cassandra/lib/     
-
 COPY docker-entrypoint.sh \
      /opt/apache-cassandra/bin/
 
 COPY docker-entrypoint-stateful-sets.sh \
      /opt/apache-cassandra/bin/
 
-     
 ADD cassandra.yaml.template /opt/apache-cassandra/conf/cassandra.yaml
 
 RUN groupadd -r cassandra -g 312 && \
