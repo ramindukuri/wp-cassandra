@@ -39,6 +39,7 @@ objects:
       metadata:
         labels:
           app: ${OBJECT_NAME_PREFIX}
+          
       volumes:
       - name: cassandra-data
         persistentVolumeClaim:
@@ -52,7 +53,7 @@ objects:
           - "--cluster_name=openstack-cluster"
           env:
             - name: PEER_DISCOVERY_SERVICE
-              value: cassandra-peers.waus.svc.cluster.local.
+              value: cassandra-peers.waus.svc
             - name: CASSANDRA_CLUSTER_NAME
               value: OpenStack cluster
             - name: CASSANDRA_DC

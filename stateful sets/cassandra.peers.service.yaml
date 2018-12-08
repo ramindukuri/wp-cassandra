@@ -3,7 +3,6 @@ kind: Service
 metadata:
     name: cassandra-peers
 spec:
-  clusterIP: None
   ports:
     - port: 7000
       name: intra-node
@@ -18,5 +17,5 @@ spec:
       targetPort : 9042
       protocol: TCP     
   selector:
-    name: cassandra  
+    name: wp-cassandra  
 
